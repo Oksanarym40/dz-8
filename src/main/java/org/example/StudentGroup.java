@@ -17,6 +17,7 @@ package org.example;
         this.students = new ArrayList<>();
         this.tasks = new ArrayList<>();
         this.completedTasks = new HashMap<>();
+             addStudent(mayor);
     }
 
     public Student getMayor() {
@@ -24,6 +25,8 @@ package org.example;
     }
 
     public void changeMayor(Student newMayor) {
+            if (!students.contains(newMayor)) {
+            addStudent(newMayor);
         this.mayor = newMayor;
     }
 
@@ -36,14 +39,19 @@ package org.example;
     }
 
     public void deleteStudent(Student student) {
-        students.remove(student);
+        public void deleteStudent(Student student) {
+        if (student.equals(mayor)) {
+            System.out.println("The mayor cannot be removed from the student group.");
+            return;
+    }
+             students.remove(student);
         completedTasks.remove(student);
     }
 
     public List<String> getTasks() {
         return new ArrayList<>(tasks);
     }
-
+       
     public void addTask(String task) {
         tasks.add(task);
         for (Student student : students) {
